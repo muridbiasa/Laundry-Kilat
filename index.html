@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <!-- ===== META & HEAD ===== -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Laundry Kilat - Bersih Sekejap, Antar Tepat! Layanan laundry kilat dengan pickup & delivery ke seluruh Jakarta." />
+  <meta name="theme-color" content="#A8FBD3" />
+  <title>Laundry Kilat — Bersih Sekejap, Antar Tepat!</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
+
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" />
+
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<!-- ===== NAVBAR ===== -->
+<nav class="navbar" id="navbar" role="navigation" aria-label="Navigasi utama">
+  <div class="nav-container">
+    <a href="#beranda" class="nav-logo" aria-label="Laundry Kilat - Beranda">
+      <span class="logo-icon">🫧</span>
+      <span class="logo-text">Laundry<span class="logo-accent">Kilat</span></span>
+    </a>
+
+    <!-- Hamburger Button -->
+    <button class="hamburger" id="hamburger" aria-label="Buka menu navigasi" aria-expanded="false" aria-controls="nav-menu">
+      <span></span><span></span><span></span>
+    </button>
+
+    <ul class="nav-menu" id="nav-menu" role="list">
+      <li><a href="#beranda" class="nav-link">Beranda</a></li>
+      <li><a href="#harga" class="nav-link">Harga</a></li>
+      <li><a href="#lacak" class="nav-link">Lacak</a></li>
+      <li><a href="#pesan" class="nav-link">Pesan</a></li>
+      <li><a href="#kontak" class="nav-link">Kontak</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ===== HERO SECTION ===== -->
+<section class="hero" id="beranda" aria-labelledby="hero-title">
+  <div class="hero-bg-pattern" aria-hidden="true"></div>
+  <div class="hero-container">
+    <div class="hero-badge">✦ Layanan #1 Laundry Kilat Jakarta</div>
+    <h1 class="hero-title" id="hero-title">
+      Bersih Sekejap,<br />
+      <span class="hero-highlight">Antar Tepat!</span>
+    </h1>
+    <p class="hero-subtitle">
+      Laundry profesional dengan pickup & delivery langsung ke pintumu.<br />
+      Hemat waktu, harga transparan, hasil terjamin bersih.
+    </p>
+    <div class="hero-cta">
+      <a href="#pesan" class="btn btn-primary">🛵 Pesan Sekarang</a>
+      <a href="#harga" class="btn btn-outline">💰 Lihat Harga</a>
+    </div>
+    <div class="hero-stats" aria-label="Statistik layanan">
+      <div class="stat-item">
+        <span class="stat-num">10K+</span>
+        <span class="stat-label">Pelanggan Puas</span>
+      </div>
+      <div class="stat-divider" aria-hidden="true"></div>
+      <div class="stat-item">
+        <span class="stat-num">24 Jam</span>
+        <span class="stat-label">Selesai Kilat</span>
+      </div>
+      <div class="stat-divider" aria-hidden="true"></div>
+      <div class="stat-item">
+        <span class="stat-num">4.9⭐</span>
+        <span class="stat-label">Rating Pelanggan</span>
+      </div>
+    </div>
+  </div>
+  <div class="hero-visual" aria-hidden="true">
+    <div class="hero-bubble bubble-1">🧺</div>
+    <div class="hero-bubble bubble-2">✨</div>
+    <div class="hero-bubble bubble-3">🫧</div>
+    <div class="hero-illustration">
+      <div class="machine-body">
+        <div class="machine-door">
+          <div class="machine-glass">
+            <div class="clothes-spin">👕</div>
+          </div>
+        </div>
+        <div class="machine-panel">
+          <div class="machine-dot"></div>
+          <div class="machine-dot"></div>
+          <div class="machine-dot"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== KEUNGGULAN ===== -->
+<section class="features" id="keunggulan" aria-labelledby="features-title">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag">Kenapa Kami?</span>
+      <h2 class="section-title" id="features-title">Keunggulan Laundry Kilat</h2>
+    </div>
+    <div class="features-grid">
+      <article class="feature-card" tabindex="0">
+        <div class="feature-icon" aria-hidden="true">⚡</div>
+        <h3 class="feature-title">Cepat & Presisi</h3>
+        <p class="feature-desc">Proses laundry selesai dalam 24 jam dengan standar kebersihan premium. Pakaian diperlakukan dengan hati-hati sesuai jenis kain.</p>
+      </article>
+      <article class="feature-card feature-card--accent" tabindex="0">
+        <div class="feature-icon" aria-hidden="true">💰</div>
+        <h3 class="feature-title">Harga Transparan /kg</h3>
+        <p class="feature-desc">Bayar sesuai berat aktual. Tidak ada biaya tersembunyi. Invoice digital dikirim langsung ke WhatsApp kamu sebelum pembayaran.</p>
+      </article>
+      <article class="feature-card" tabindex="0">
+        <div class="feature-icon" aria-hidden="true">🛵</div>
+        <h3 class="feature-title">Pickup & Delivery</h3>
+        <p class="feature-desc">Kurir kami jemput langsung dari rumah dan antar balik setelah selesai. Lacak posisi kurir secara real-time di aplikasi kami.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ===== HARGA & KALKULATOR ===== -->
+<section class="pricing" id="harga" aria-labelledby="pricing-title">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag">Transparan & Terjangkau</span>
+      <h2 class="section-title" id="pricing-title">Daftar Harga Layanan</h2>
+    </div>
+
+    <!-- Paket Cards -->
+    <div class="pricing-grid">
+      <article class="pricing-card" data-paket="reguler" tabindex="0">
+        <div class="pricing-badge">Reguler</div>
+        <div class="pricing-price">Rp 8.000<span>/kg</span></div>
+        <ul class="pricing-features" role="list">
+          <li>✓ Selesai 2–3 Hari</li>
+          <li>✓ Cuci + Kering</li>
+          <li>✓ Lipat Rapi</li>
+          <li>✓ Pickup & Delivery</li>
+          <li>✗ Setrika</li>
+        </ul>
+        <button class="btn btn-outline pricing-choose" data-paket="reguler" aria-label="Pilih paket Reguler">Pilih Paket</button>
+      </article>
+
+      <article class="pricing-card pricing-card--featured" data-paket="kilat" tabindex="0">
+        <div class="pricing-badge pricing-badge--featured">🔥 Terlaris</div>
+        <div class="pricing-price">Rp 12.000<span>/kg</span></div>
+        <ul class="pricing-features" role="list">
+          <li>✓ Selesai 24 Jam</li>
+          <li>✓ Cuci + Kering</li>
+          <li>✓ Setrika Rapi</li>
+          <li>✓ Pickup & Delivery</li>
+          <li>✓ Parfum Premium</li>
+        </ul>
+        <button class="btn btn-primary pricing-choose" data-paket="kilat" aria-label="Pilih paket Kilat 24 Jam">Pilih Paket</button>
+      </article>
+
+      <article class="pricing-card" data-paket="express" tabindex="0">
+        <div class="pricing-badge">Express</div>
+        <div class="pricing-price">Rp 18.000<span>/kg</span></div>
+        <ul class="pricing-features" role="list">
+          <li>✓ Selesai 6 Jam</li>
+          <li>✓ Cuci + Kering</li>
+          <li>✓ Setrika Premium</li>
+          <li>✓ Pickup & Delivery</li>
+          <li>✓ Parfum Pilihan</li>
+        </ul>
+        <button class="btn btn-outline pricing-choose" data-paket="express" aria-label="Pilih paket Express">Pilih Paket</button>
+      </article>
+    </div>
+
+    <!-- Kalkulator Harga -->
+    <div class="calculator-card" aria-labelledby="calc-title">
+      <h3 class="calc-title" id="calc-title">🧮 Kalkulator Harga Instan</h3>
+      <div class="calc-form">
+        <div class="calc-group">
+          <label for="calc-berat" class="calc-label">Berat Estimasi (kg)</label>
+          <input type="number" id="calc-berat" class="calc-input" min="2" max="50" placeholder="Min. 2 kg" aria-describedby="calc-berat-hint" />
+          <span id="calc-berat-hint" class="input-hint">Minimal pemesanan 2 kg</span>
+        </div>
+        <div class="calc-group">
+          <label for="calc-paket" class="calc-label">Pilih Paket</label>
+          <select id="calc-paket" class="calc-input" aria-label="Pilih paket layanan untuk kalkulasi">
+            <option value="reguler">Reguler — Rp 8.000/kg</option>
+            <option value="kilat" selected>Kilat 24 Jam — Rp 12.000/kg</option>
+            <option value="express">Express 6 Jam — Rp 18.000/kg</option>
+          </select>
+        </div>
+        <button class="btn btn-primary" id="btn-hitung" aria-label="Hitung estimasi harga">Hitung Estimasi</button>
+      </div>
+
+      <!-- Hasil Kalkulator / Invoice Preview -->
+      <div class="calc-result" id="calc-result" aria-live="polite" hidden>
+        <div class="invoice-preview" id="invoice-preview">
+          <div class="invoice-header">
+            <div class="invoice-logo">🫧 Laundry Kilat</div>
+            <div class="invoice-meta">
+              <span>ESTIMASI INVOICE</span>
+              <span id="inv-date"></span>
+            </div>
+          </div>
+          <div class="invoice-body">
+            <div class="invoice-row">
+              <span>Paket Layanan</span>
+              <span id="inv-paket"></span>
+            </div>
+            <div class="invoice-row">
+              <span>Berat</span>
+              <span id="inv-berat"></span>
+            </div>
+            <div class="invoice-row">
+              <span>Harga per kg</span>
+              <span id="inv-hargakg"></span>
+            </div>
+            <div class="invoice-row">
+              <span>Biaya Pickup & Delivery</span>
+              <span>Rp 5.000</span>
+            </div>
+            <div class="invoice-divider"></div>
+            <div class="invoice-row invoice-total">
+              <span>Total Estimasi</span>
+              <span id="inv-total"></span>
+            </div>
+          </div>
+          <div class="invoice-footer">
+            * Berat aktual ditimbang saat pickup. Total final dapat berbeda.
+          </div>
+        </div>
+        <button class="btn btn-outline" id="btn-pesan-dari-kalkulator" aria-label="Lanjut pesan dari hasil kalkulator">Lanjut Pesan →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FORM PEMESANAN ===== -->
+<section class="order" id="pesan" aria-labelledby="order-title">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag">Mudah & Cepat</span>
+      <h2 class="section-title" id="order-title">Buat Pesanan Baru</h2>
+    </div>
+
+    <div class="order-wrapper">
+      <form class="order-form" id="order-form" novalidate aria-label="Form pemesanan laundry">
+        <!-- Nama -->
+        <div class="form-group">
+          <label for="nama" class="form-label">Nama Lengkap <span aria-hidden="true">*</span></label>
+          <input type="text" id="nama" name="nama" class="form-input" placeholder="Masukkan nama lengkap kamu" required autocomplete="name" aria-required="true" />
+          <span class="form-error" id="error-nama" role="alert" aria-live="polite"></span>
+        </div>
+
+        <!-- No. WA -->
+        <div class="form-group">
+          <label for="wa" class="form-label">Nomor WhatsApp <span aria-hidden="true">*</span></label>
+          <input type="tel" id="wa" name="wa" class="form-input" placeholder="Contoh: 08123456789" required autocomplete="tel" aria-required="true" aria-describedby="wa-hint" />
+          <span id="wa-hint" class="input-hint">Format: 08xxxxxxxxxx atau +628xxxxxxxxx</span>
+          <span class="form-error" id="error-wa" role="alert" aria-live="polite"></span>
+        </div>
+
+        <!-- Alamat -->
+        <div class="form-group">
+          <label for="alamat" class="form-label">Alamat Pickup <span aria-hidden="true">*</span></label>
+          <textarea id="alamat" name="alamat" class="form-input form-textarea" placeholder="Masukkan alamat lengkap termasuk nama gedung/blok/RT/RW" required aria-required="true" rows="3"></textarea>
+          <span class="form-error" id="error-alamat" role="alert" aria-live="polite"></span>
+        </div>
+
+        <!-- Berat & Paket (Grid) -->
+        <div class="form-row">
+          <div class="form-group">
+            <label for="berat" class="form-label">Estimasi Berat (kg) <span aria-hidden="true">*</span></label>
+            <input type="number" id="berat" name="berat" class="form-input" placeholder="Min. 2 kg" min="2" required aria-required="true" aria-describedby="berat-hint" />
+            <span id="berat-hint" class="input-hint">Minimal 2 kg per pesanan</span>
+            <span class="form-error" id="error-berat" role="alert" aria-live="polite"></span>
+          </div>
+          <div class="form-group">
+            <label for="paket" class="form-label">Pilih Paket <span aria-hidden="true">*</span></label>
+            <select id="paket" name="paket" class="form-input" required aria-required="true">
+              <option value="">-- Pilih Paket --</option>
+              <option value="reguler">Reguler — Rp 8.000/kg (2–3 Hari)</option>
+              <option value="kilat">Kilat 24 Jam — Rp 12.000/kg</option>
+              <option value="express">Express 6 Jam — Rp 18.000/kg</option>
+            </select>
+            <span class="form-error" id="error-paket" role="alert" aria-live="polite"></span>
+          </div>
+        </div>
+
+        <!-- Catatan -->
+        <div class="form-group">
+          <label for="catatan" class="form-label">Catatan Tambahan</label>
+          <textarea id="catatan" name="catatan" class="form-input form-textarea" placeholder="Contoh: ada pakaian sensitif, parfum pilihan, dsb. (opsional)" rows="2"></textarea>
+        </div>
+
+        <!-- Preview Harga -->
+        <div class="order-price-preview" id="order-price-preview" aria-live="polite">
+          <span class="preview-label">Estimasi Total:</span>
+          <span class="preview-total" id="preview-total">—</span>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-full" id="btn-pesan">
+          💳 Bayar &amp; Konfirmasi Pesanan
+        </button>
+      </form>
+
+      <!-- Info Panel -->
+      <aside class="order-info" aria-label="Informasi pemesanan">
+        <h3 class="info-title">📋 Cara Memesan</h3>
+        <ol class="info-steps" role="list">
+          <li class="info-step">
+            <span class="step-num" aria-hidden="true">1</span>
+            <div><strong>Isi Form Pesanan</strong><br />Lengkapi data diri, alamat, dan estimasi berat pakaian.</div>
+          </li>
+          <li class="info-step">
+            <span class="step-num" aria-hidden="true">2</span>
+            <div><strong>Konfirmasi & Bayar</strong><br />Pilih metode pembayaran QRIS atau transfer bank.</div>
+          </li>
+          <li class="info-step">
+            <span class="step-num" aria-hidden="true">3</span>
+            <div><strong>Kurir Jemput</strong><br />Kurir kami tiba sesuai jadwal pickup yang diinginkan.</div>
+          </li>
+          <li class="info-step">
+            <span class="step-num" aria-hidden="true">4</span>
+            <div><strong>Terima Bersih!</strong><br />Laundry diantar kembali ke pintumu, bersih & wangi.</div>
+          </li>
+        </ol>
+        <div class="info-contact">
+          <p>Ada pertanyaan?</p>
+          <a href="https://wa.me/6281234567890" class="btn btn-outline" target="_blank" rel="noopener noreferrer">💬 Chat WA Kami</a>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- ===== MODAL PEMBAYARAN ===== -->
+<div class="modal-overlay" id="payment-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" hidden>
+  <div class="modal-content">
+    <button class="modal-close" id="modal-close" aria-label="Tutup modal pembayaran">✕</button>
+
+    <div class="modal-header">
+      <div class="modal-icon" aria-hidden="true">🎉</div>
+      <h2 class="modal-title" id="modal-title">Pesanan Berhasil Dibuat!</h2>
+      <p class="modal-subtitle">Selesaikan pembayaran untuk konfirmasi pesanan kamu.</p>
+    </div>
+
+    <!-- ID Pesanan -->
+    <div class="order-id-box" aria-label="ID Pesanan kamu">
+      <span class="order-id-label">ID Pesanan Kamu:</span>
+      <strong class="order-id-value" id="modal-order-id"></strong>
+      <button class="copy-btn" id="copy-order-id" aria-label="Salin ID Pesanan">📋 Salin</button>
+    </div>
+
+    <!-- Invoice di Modal -->
+    <div class="modal-invoice" id="modal-invoice" aria-label="Detail invoice pembayaran">
+      <div class="modal-invoice-row"><span>Nama</span><span id="mi-nama"></span></div>
+      <div class="modal-invoice-row"><span>Paket</span><span id="mi-paket"></span></div>
+      <div class="modal-invoice-row"><span>Berat</span><span id="mi-berat"></span></div>
+      <div class="modal-invoice-row"><span>Biaya Laundry</span><span id="mi-laundry"></span></div>
+      <div class="modal-invoice-row"><span>Biaya Pickup & Delivery</span><span>Rp 5.000</span></div>
+      <div class="modal-invoice-divider"></div>
+      <div class="modal-invoice-row modal-invoice-total"><span>TOTAL BAYAR</span><span id="mi-total"></span></div>
+    </div>
+
+    <!-- Metode Pembayaran -->
+    <div class="payment-methods" aria-label="Metode pembayaran">
+      <div class="payment-tabs" role="tablist" aria-label="Pilih metode pembayaran">
+        <button class="payment-tab active" role="tab" aria-selected="true" id="tab-qris" aria-controls="panel-qris" data-tab="qris">QRIS</button>
+        <button class="payment-tab" role="tab" aria-selected="false" id="tab-transfer" aria-controls="panel-transfer" data-tab="transfer">Transfer Bank</button>
+      </div>
+
+      <!-- Panel QRIS -->
+      <div class="payment-panel" id="panel-qris" role="tabpanel" aria-labelledby="tab-qris">
+        <p class="payment-instruction">Scan QR Code di bawah menggunakan aplikasi e-wallet atau mobile banking apapun.</p>
+        <div class="qr-container" aria-label="QR Code pembayaran QRIS">
+          <div class="qr-placeholder" aria-hidden="true">
+            <div class="qr-inner">
+              <div class="qr-grid" id="qr-grid"></div>
+            </div>
+            <div class="qr-label">QRIS Laundry Kilat</div>
+          </div>
+        </div>
+        <p class="qr-note">⏱ QR berlaku 30 menit. Total: <strong id="qr-total"></strong></p>
+      </div>
+
+      <!-- Panel Transfer Bank -->
+      <div class="payment-panel" id="panel-transfer" role="tabpanel" aria-labelledby="tab-transfer" hidden>
+        <p class="payment-instruction">Transfer ke salah satu rekening berikut, lalu kirim bukti ke WhatsApp kami.</p>
+        <div class="bank-cards">
+          <div class="bank-card" tabindex="0">
+            <div class="bank-logo bca" aria-label="Bank BCA">BCA</div>
+            <div class="bank-info">
+              <div class="bank-norek">1234567890</div>
+              <div class="bank-name">a/n Laundry Kilat</div>
+            </div>
+            <button class="copy-btn" data-copy="1234567890" aria-label="Salin nomor rekening BCA">📋 Salin</button>
+          </div>
+          <div class="bank-card" tabindex="0">
+            <div class="bank-logo mandiri" aria-label="Bank Mandiri">Mandiri</div>
+            <div class="bank-info">
+              <div class="bank-norek">0987654321</div>
+              <div class="bank-name">a/n Laundry Kilat</div>
+            </div>
+            <button class="copy-btn" data-copy="0987654321" aria-label="Salin nomor rekening Mandiri">📋 Salin</button>
+          </div>
+        </div>
+        <p class="transfer-amount">Jumlah Transfer: <strong id="transfer-total"></strong></p>
+      </div>
+    </div>
+
+    <!-- Tombol Kirim Bukti -->
+    <a href="#" class="btn btn-primary btn-full" id="btn-kirim-bukti" target="_blank" rel="noopener noreferrer">
+      📱 Kirim Bukti Pembayaran via WhatsApp
+    </a>
+
+    <p class="modal-note">Simpan ID Pesanan untuk melacak status laundry kamu.</p>
+  </div>
+</div>
+
+<!-- ===== TRACKER PESANAN ===== -->
+<section class="tracker" id="lacak" aria-labelledby="tracker-title">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag">Real-Time Tracking</span>
+      <h2 class="section-title" id="tracker-title">Lacak Pesanan Kamu</h2>
+    </div>
+
+    <div class="tracker-wrapper">
+      <!-- Input ID -->
+      <div class="tracker-search">
+        <label for="tracker-input" class="tracker-label">Masukkan ID Pesanan</label>
+        <div class="tracker-input-group">
+          <input type="text" id="tracker-input" class="form-input tracker-input" placeholder="Contoh: LK-1234567890-4321" aria-label="ID Pesanan untuk dilacak" />
+          <button class="btn btn-primary" id="btn-lacak" aria-label="Lacak pesanan">🔍 Lacak</button>
+        </div>
+        <span class="form-error" id="error-tracker" role="alert" aria-live="polite"></span>
+      </div>
+
+      <!-- Hasil Tracker -->
+      <div class="tracker-result" id="tracker-result" hidden aria-live="polite">
+        <div class="tracker-info">
+          <div class="tracker-info-row"><span>ID Pesanan</span><strong id="tr-id"></strong></div>
+          <div class="tracker-info-row"><span>Nama</span><strong id="tr-nama"></strong></div>
+          <div class="tracker-info-row"><span>Paket</span><strong id="tr-paket"></strong></div>
+          <div class="tracker-info-row"><span>Status</span><strong id="tr-status" class="status-badge"></strong></div>
+        </div>
+
+        <!-- Progress Steps -->
+        <div class="progress-steps" role="list" aria-label="Tahap proses laundry">
+          <div class="progress-step" id="step-1" role="listitem">
+            <div class="step-icon" aria-hidden="true">🔄</div>
+            <div class="step-content">
+              <div class="step-title">Diproses</div>
+              <div class="step-desc">Pesanan diterima & dijadwalkan</div>
+            </div>
+          </div>
+          <div class="progress-connector" aria-hidden="true"></div>
+          <div class="progress-step" id="step-2" role="listitem">
+            <div class="step-icon" aria-hidden="true">📦</div>
+            <div class="step-content">
+              <div class="step-title">Kurir Jemput</div>
+              <div class="step-desc">Kurir dalam perjalanan ke lokasi kamu</div>
+            </div>
+          </div>
+          <div class="progress-connector" aria-hidden="true"></div>
+          <div class="progress-step" id="step-3" role="listitem">
+            <div class="step-icon" aria-hidden="true">🚚</div>
+            <div class="step-content">
+              <div class="step-title">Kurir Antar</div>
+              <div class="step-desc">Laundry selesai, kurir mengantarkan</div>
+            </div>
+          </div>
+          <div class="progress-connector" aria-hidden="true"></div>
+          <div class="progress-step" id="step-4" role="listitem">
+            <div class="step-icon" aria-hidden="true">✅</div>
+            <div class="step-content">
+              <div class="step-title">Selesai</div>
+              <div class="step-desc">Laundry telah diterima</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tombol Simulasi -->
+        <div class="tracker-actions">
+          <button class="btn btn-outline" id="btn-simulasi" aria-label="Simulasikan perubahan status pesanan">⏩ Simulasikan Perubahan Status</button>
+        </div>
+      </div>
+
+      <!-- Empty State Tracker -->
+      <div class="tracker-empty" id="tracker-empty" aria-hidden="true">
+        <div class="empty-icon" aria-hidden="true">🔍</div>
+        <p>Masukkan ID Pesanan untuk melihat status laundry kamu.</p>
+        <p class="empty-hint">ID Pesanan dikirim via WhatsApp setelah konfirmasi pembayaran.</p>
+      </div>
+    </div>
+
+    <!-- Peta Tracking -->
+    <div class="map-section" aria-labelledby="map-title">
+      <h3 class="map-title" id="map-title">🗺️ Peta Lokasi Kurir</h3>
+      <div class="map-info-bar">
+        <span class="map-info-badge" aria-live="polite">📡 Lokasi kurir diperbarui setiap 30 detik (simulasi)</span>
+      </div>
+      <div id="map" class="leaflet-map" role="application" aria-label="Peta tracking posisi kurir" tabindex="0"></div>
+      <div class="map-legend" aria-label="Keterangan simbol peta">
+        <div class="legend-item"><span aria-hidden="true">🏠</span> Lokasi Pickup Kamu</div>
+        <div class="legend-item"><span aria-hidden="true">🛵</span> Posisi Kurir</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== KONTAK ===== -->
+<section class="contact" id="kontak" aria-labelledby="contact-title">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag">Hubungi Kami</span>
+      <h2 class="section-title" id="contact-title">Ada Pertanyaan?</h2>
+    </div>
+    <div class="contact-grid">
+      <a href="https://wa.me/6281234567890" class="contact-card" target="_blank" rel="noopener noreferrer" aria-label="Hubungi via WhatsApp di +62 812-3456-7890">
+        <div class="contact-icon" aria-hidden="true">💬</div>
+        <div class="contact-info">
+          <div class="contact-label">WhatsApp</div>
+          <div class="contact-value">+62 812-3456-7890</div>
+        </div>
+      </a>
+      <a href="mailto:hello@laundrykilat.id" class="contact-card" aria-label="Kirim email ke hello@laundrykilat.id">
+        <div class="contact-icon" aria-hidden="true">📧</div>
+        <div class="contact-info">
+          <div class="contact-label">Email</div>
+          <div class="contact-value">hello@laundrykilat.id</div>
+        </div>
+      </a>
+      <div class="contact-card" tabindex="0" aria-label="Alamat kantor: Jl. Sudirman No. 45, Jakarta">
+        <div class="contact-icon" aria-hidden="true">📍</div>
+        <div class="contact-info">
+          <div class="contact-label">Alamat</div>
+          <div class="contact-value">Jl. Sudirman No. 45, Jakarta</div>
+        </div>
+      </div>
+      <div class="contact-card" tabindex="0" aria-label="Jam operasional: 08.00 sampai 21.00">
+        <div class="contact-icon" aria-hidden="true">🕐</div>
+        <div class="contact-info">
+          <div class="contact-label">Jam Operasional</div>
+          <div class="contact-value">08.00 – 21.00 WIB (Setiap Hari)</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer" role="contentinfo">
+  <div class="container">
+    <div class="footer-content">
+      <div class="footer-brand">
+        <div class="footer-logo">🫧 Laundry<span>Kilat</span></div>
+        <p class="footer-tagline">Bersih Sekejap, Antar Tepat!</p>
+        <p class="footer-desc">Layanan laundry profesional dengan pickup & delivery di Jakarta. Bersih, cepat, dan terpercaya sejak 2020.</p>
+      </div>
+      <div class="footer-links">
+        <h4>Navigasi</h4>
+        <ul role="list">
+          <li><a href="#beranda">Beranda</a></li>
+          <li><a href="#harga">Harga & Paket</a></li>
+          <li><a href="#lacak">Lacak Pesanan</a></li>
+          <li><a href="#pesan">Buat Pesanan</a></li>
+          <li><a href="#kontak">Kontak</a></li>
+        </ul>
+      </div>
+      <div class="footer-links">
+        <h4>Layanan</h4>
+        <ul role="list">
+          <li><a href="#harga">Paket Reguler</a></li>
+          <li><a href="#harga">Paket Kilat 24 Jam</a></li>
+          <li><a href="#harga">Paket Express 6 Jam</a></li>
+          <li><a href="#pesan">Pickup & Delivery</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 Laundry Kilat. Semua hak dilindungi undang-undang.</p>
+      <p class="footer-made">Dibuat dengan ❤️ untuk pelanggan setia kami.</p>
+    </div>
+  </div>
+</footer>
+
+<!-- Toast Notification -->
+<div class="toast" id="toast" role="status" aria-live="polite" aria-atomic="true"></div>
+
+<!-- Leaflet JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<!-- Main Script -->
+<script src="js/script.js"></script>
+</body>
+</html>
