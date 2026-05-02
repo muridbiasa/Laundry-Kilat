@@ -43,4 +43,42 @@ module.exports = async function handler(req, res) {
         console.error('Error dari Midtrans:', error);
         res.status(500).json({ error: 'Gagal membuat token pembayaran' });
     }
+
+// ===== PENANGANAN REDIRECT DARI APLIKASI MOBILE (DEEP LINK) =====
+window.addEventListener('DOMContentLoaded', () => {
+  // Baca parameter di URL bar
+  const urlParams = new URLSearchParams(window.location.search);
+  const orderId = urlParams.get('order_id');
+  const statusCode = urlParams.get('status_code');
+  const transactionStatus = urlParams.get('transaction_status');
+
+  // Jika URL mengandung parameter sukses dari Midtrans
+  if (orderId && (statusCode === '200' || statusCode === '201') && (transactionStatus === 'settlement' || transactionStatus === 'capture')) {
+      
+      // Cari data pesanan di localStorage
+      const pesanan = cariPesanan(orderId);
+      
+      if (pesanan) {
+          // Update status jadi diproses
+          updateStatusPesanan(orderId, 'diproses');
+          
+          const noWAAdmin = "6285869951609";
+          const rincian = HARGA_PAKET[pesanan.paket]?.nama || pesanan.paket;
+          const totalRp = formatRupiah(pesanan.total);
+          
+          const pesanWA = encodeURIComponent(`Halo Admin Laundry Kilat! Pembayaran berhasil via Midtrans.\n\nID Pesanan: ${pesanan.id}\nNama: ${pesanan.nama}\nPaket: ${rincian}\nTotal: ${totalRp}\n\nMohon pesanan segera diproses. Terima kasih!`);
+          
+          tampilkanToast('Pembayaran Terverifikasi! Mengalihkan ke WhatsApp...');
+          
+          // Beri jeda 2 detik agar user sempat melihat pesan sukses sebelum dialihkan
+          setTimeout(() => {
+              window.location.href = `https://api.whatsapp.com/send?phone=${noWAAdmin}&text=${pesanWA}`;
+          }, 2000);
+          
+          // Bersihkan URL agar tidak terus-terusan redirect kalau di-refresh
+          window.history.replaceState({}, document.title, window.location.pathname);
+      }
+  }
+});
+
 };
