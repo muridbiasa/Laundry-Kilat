@@ -18,6 +18,9 @@
 
   <!-- Main Stylesheet -->
   <link rel="stylesheet" href="css/style.css" />
+
+  <!-- Midtrans Snap Sandbox SDK -->
+  <script src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="Mid-client-fC8iQW7BR7LF8Z1T"></script>
 </head>
 <body>
 
@@ -25,11 +28,10 @@
 <nav class="navbar" id="navbar" role="navigation" aria-label="Navigasi utama">
   <div class="nav-container">
     <a href="#beranda" class="nav-logo" aria-label="Laundry Kilat - Beranda">
-      <span class="logo-icon">🫧</span>
+      <span class="logo-icon"></span>
       <span class="logo-text">Laundry<span class="logo-accent">Kilat</span></span>
     </a>
 
-    <!-- Hamburger Button -->
     <button class="hamburger" id="hamburger" aria-label="Buka menu navigasi" aria-expanded="false" aria-controls="nav-menu">
       <span></span><span></span><span></span>
     </button>
@@ -50,8 +52,8 @@
   <div class="hero-container">
     <div class="hero-badge">✦ Layanan #1 Laundry Kilat Jakarta</div>
     <h1 class="hero-title" id="hero-title">
-      Bersih Sekejap,<br />
-      <span class="hero-highlight">Antar Tepat!</span>
+      Bersih Sekejap,<br/>
+      <span class="hero-highlight">Antar Cepat!</span>
     </h1>
     <p class="hero-subtitle">
       Laundry profesional dengan pickup & delivery langsung ke pintumu.<br />
@@ -134,7 +136,6 @@
       <h2 class="section-title" id="pricing-title">Daftar Harga Layanan</h2>
     </div>
 
-    <!-- Paket Cards -->
     <div class="pricing-grid">
       <article class="pricing-card" data-paket="reguler" tabindex="0">
         <div class="pricing-badge">Reguler</div>
@@ -178,7 +179,7 @@
 
     <!-- Kalkulator Harga -->
     <div class="calculator-card" aria-labelledby="calc-title">
-      <h3 class="calc-title" id="calc-title">🧮 Kalkulator Harga Instan</h3>
+      <h3 class="calc-title" id="calc-title">Kalkulator Harga Instan</h3>
       <div class="calc-form">
         <div class="calc-group">
           <label for="calc-berat" class="calc-label">Berat Estimasi (kg)</label>
@@ -200,7 +201,7 @@
       <div class="calc-result" id="calc-result" aria-live="polite" hidden>
         <div class="invoice-preview" id="invoice-preview">
           <div class="invoice-header">
-            <div class="invoice-logo">🫧 Laundry Kilat</div>
+            <div class="invoice-logo">Laundry Kilat</div>
             <div class="invoice-meta">
               <span>ESTIMASI INVOICE</span>
               <span id="inv-date"></span>
@@ -249,14 +250,12 @@
 
     <div class="order-wrapper">
       <form class="order-form" id="order-form" novalidate aria-label="Form pemesanan laundry">
-        <!-- Nama -->
         <div class="form-group">
           <label for="nama" class="form-label">Nama Lengkap <span aria-hidden="true">*</span></label>
           <input type="text" id="nama" name="nama" class="form-input" placeholder="Masukkan nama lengkap kamu" required autocomplete="name" aria-required="true" />
           <span class="form-error" id="error-nama" role="alert" aria-live="polite"></span>
         </div>
 
-        <!-- No. WA -->
         <div class="form-group">
           <label for="wa" class="form-label">Nomor WhatsApp <span aria-hidden="true">*</span></label>
           <input type="tel" id="wa" name="wa" class="form-input" placeholder="Contoh: 08123456789" required autocomplete="tel" aria-required="true" aria-describedby="wa-hint" />
@@ -264,14 +263,12 @@
           <span class="form-error" id="error-wa" role="alert" aria-live="polite"></span>
         </div>
 
-        <!-- Alamat -->
         <div class="form-group">
           <label for="alamat" class="form-label">Alamat Pickup <span aria-hidden="true">*</span></label>
           <textarea id="alamat" name="alamat" class="form-input form-textarea" placeholder="Masukkan alamat lengkap termasuk nama gedung/blok/RT/RW" required aria-required="true" rows="3"></textarea>
           <span class="form-error" id="error-alamat" role="alert" aria-live="polite"></span>
         </div>
 
-        <!-- Berat & Paket (Grid) -->
         <div class="form-row">
           <div class="form-group">
             <label for="berat" class="form-label">Estimasi Berat (kg) <span aria-hidden="true">*</span></label>
@@ -291,20 +288,18 @@
           </div>
         </div>
 
-        <!-- Catatan -->
         <div class="form-group">
           <label for="catatan" class="form-label">Catatan Tambahan</label>
           <textarea id="catatan" name="catatan" class="form-input form-textarea" placeholder="Contoh: ada pakaian sensitif, parfum pilihan, dsb. (opsional)" rows="2"></textarea>
         </div>
 
-        <!-- Preview Harga -->
         <div class="order-price-preview" id="order-price-preview" aria-live="polite">
           <span class="preview-label">Estimasi Total:</span>
           <span class="preview-total" id="preview-total">—</span>
         </div>
 
         <button type="submit" class="btn btn-primary btn-full" id="btn-pesan">
-          💳 Bayar &amp; Konfirmasi Pesanan
+          Bayar &amp; Konfirmasi Pesanan
         </button>
       </form>
 
@@ -318,7 +313,7 @@
           </li>
           <li class="info-step">
             <span class="step-num" aria-hidden="true">2</span>
-            <div><strong>Konfirmasi & Bayar</strong><br />Pilih metode pembayaran QRIS atau transfer bank.</div>
+            <div><strong>Konfirmasi & Bayar</strong><br />Selesaikan pembayaran digital via Midtrans secara aman.</div>
           </li>
           <li class="info-step">
             <span class="step-num" aria-hidden="true">3</span>
@@ -331,20 +326,20 @@
         </ol>
         <div class="info-contact">
           <p>Ada pertanyaan?</p>
-          <a href="https://wa.me/6281234567890" class="btn btn-outline" target="_blank" rel="noopener noreferrer">💬 Chat WA Kami</a>
+          <a href="https://wa.me/6285869951609" class="btn btn-outline" target="_blank" rel="noopener noreferrer">💬 Chat WA Kami</a>
         </div>
       </aside>
     </div>
   </div>
 </section>
 
-<!-- ===== MODAL PEMBAYARAN ===== -->
+<!-- ===== MODAL PEMBAYARAN MIDTRANS ===== -->
 <div class="modal-overlay" id="payment-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" hidden>
   <div class="modal-content">
     <button class="modal-close" id="modal-close" aria-label="Tutup modal pembayaran">✕</button>
 
     <div class="modal-header">
-      <div class="modal-icon" aria-hidden="true">🎉</div>
+      <div class="modal-icon" aria-hidden="true"></div>
       <h2 class="modal-title" id="modal-title">Pesanan Berhasil Dibuat!</h2>
       <p class="modal-subtitle">Selesaikan pembayaran untuk konfirmasi pesanan kamu.</p>
     </div>
@@ -367,56 +362,15 @@
       <div class="modal-invoice-row modal-invoice-total"><span>TOTAL BAYAR</span><span id="mi-total"></span></div>
     </div>
 
-    <!-- Metode Pembayaran -->
-    <div class="payment-methods" aria-label="Metode pembayaran">
-      <div class="payment-tabs" role="tablist" aria-label="Pilih metode pembayaran">
-        <button class="payment-tab active" role="tab" aria-selected="true" id="tab-qris" aria-controls="panel-qris" data-tab="qris">QRIS</button>
-        <button class="payment-tab" role="tab" aria-selected="false" id="tab-transfer" aria-controls="panel-transfer" data-tab="transfer">Transfer Bank</button>
-      </div>
-
-      <!-- Panel QRIS -->
-      <div class="payment-panel" id="panel-qris" role="tabpanel" aria-labelledby="tab-qris">
-        <p class="payment-instruction">Scan QR Code di bawah menggunakan aplikasi e-wallet atau mobile banking apapun.</p>
-        <div class="qr-container" aria-label="QR Code pembayaran QRIS">
-          <div class="qr-placeholder" aria-hidden="true">
-            <div class="qr-inner">
-              <div class="qr-grid" id="qr-grid"></div>
-            </div>
-            <div class="qr-label">QRIS Laundry Kilat</div>
-          </div>
-        </div>
-        <p class="qr-note">⏱ QR berlaku 30 menit. Total: <strong id="qr-total"></strong></p>
-      </div>
-
-      <!-- Panel Transfer Bank -->
-      <div class="payment-panel" id="panel-transfer" role="tabpanel" aria-labelledby="tab-transfer" hidden>
-        <p class="payment-instruction">Transfer ke salah satu rekening berikut, lalu kirim bukti ke WhatsApp kami.</p>
-        <div class="bank-cards">
-          <div class="bank-card" tabindex="0">
-            <div class="bank-logo bca" aria-label="Bank BCA">BCA</div>
-            <div class="bank-info">
-              <div class="bank-norek">1234567890</div>
-              <div class="bank-name">a/n Laundry Kilat</div>
-            </div>
-            <button class="copy-btn" data-copy="1234567890" aria-label="Salin nomor rekening BCA">📋 Salin</button>
-          </div>
-          <div class="bank-card" tabindex="0">
-            <div class="bank-logo mandiri" aria-label="Bank Mandiri">Mandiri</div>
-            <div class="bank-info">
-              <div class="bank-norek">0987654321</div>
-              <div class="bank-name">a/n Laundry Kilat</div>
-            </div>
-            <button class="copy-btn" data-copy="0987654321" aria-label="Salin nomor rekening Mandiri">📋 Salin</button>
-          </div>
-        </div>
-        <p class="transfer-amount">Jumlah Transfer: <strong id="transfer-total"></strong></p>
-      </div>
+    <!-- Info Pengalihan -->
+    <div class="midtrans-info" style="text-align: center; margin-bottom: 24px;">
+      <p class="payment-instruction">Kamu akan diarahkan ke Midtrans untuk pembayaran aman. <br><strong>Setelah berhasil, akan otomatis dialihkan ke WhatsApp.</strong></p>
     </div>
 
-    <!-- Tombol Kirim Bukti -->
-    <a href="#" class="btn btn-primary btn-full" id="btn-kirim-bukti" target="_blank" rel="noopener noreferrer">
-      📱 Kirim Bukti Pembayaran via WhatsApp
-    </a>
+    <!-- Tombol Bayar Midtrans -->
+    <button class="btn btn-primary btn-full" id="btn-bayar-midtrans">
+      💳 Bayar Sekarang (Snap Midtrans)
+    </button>
 
     <p class="modal-note">Simpan ID Pesanan untuk melacak status laundry kamu.</p>
   </div>
@@ -431,7 +385,6 @@
     </div>
 
     <div class="tracker-wrapper">
-      <!-- Input ID -->
       <div class="tracker-search">
         <label for="tracker-input" class="tracker-label">Masukkan ID Pesanan</label>
         <div class="tracker-input-group">
@@ -450,7 +403,6 @@
           <div class="tracker-info-row"><span>Status</span><strong id="tr-status" class="status-badge"></strong></div>
         </div>
 
-        <!-- Progress Steps -->
         <div class="progress-steps" role="list" aria-label="Tahap proses laundry">
           <div class="progress-step" id="step-1" role="listitem">
             <div class="step-icon" aria-hidden="true">🔄</div>
@@ -485,13 +437,11 @@
           </div>
         </div>
 
-        <!-- Tombol Simulasi -->
         <div class="tracker-actions">
           <button class="btn btn-outline" id="btn-simulasi" aria-label="Simulasikan perubahan status pesanan">⏩ Simulasikan Perubahan Status</button>
         </div>
       </div>
 
-      <!-- Empty State Tracker -->
       <div class="tracker-empty" id="tracker-empty" aria-hidden="true">
         <div class="empty-icon" aria-hidden="true">🔍</div>
         <p>Masukkan ID Pesanan untuk melihat status laundry kamu.</p>
@@ -499,7 +449,6 @@
       </div>
     </div>
 
-    <!-- Peta Tracking -->
     <div class="map-section" aria-labelledby="map-title">
       <h3 class="map-title" id="map-title">🗺️ Peta Lokasi Kurir</h3>
       <div class="map-info-bar">
@@ -522,11 +471,11 @@
       <h2 class="section-title" id="contact-title">Ada Pertanyaan?</h2>
     </div>
     <div class="contact-grid">
-      <a href="https://wa.me/6281234567890" class="contact-card" target="_blank" rel="noopener noreferrer" aria-label="Hubungi via WhatsApp di +62 812-3456-7890">
+      <a href="https://wa.me/6285869951609" class="contact-card" target="_blank" rel="noopener noreferrer" aria-label="Hubungi via WhatsApp di +62 858-6995-1609">
         <div class="contact-icon" aria-hidden="true">💬</div>
         <div class="contact-info">
           <div class="contact-label">WhatsApp</div>
-          <div class="contact-value">+62 812-3456-7890</div>
+          <div class="contact-value">+62 858-6995-1609</div>
         </div>
       </a>
       <a href="mailto:hello@laundrykilat.id" class="contact-card" aria-label="Kirim email ke hello@laundrykilat.id">
@@ -559,8 +508,8 @@
   <div class="container">
     <div class="footer-content">
       <div class="footer-brand">
-        <div class="footer-logo">🫧 Laundry<span>Kilat</span></div>
-        <p class="footer-tagline">Bersih Sekejap, Antar Tepat!</p>
+        <div class="footer-logo">Laundry<span>Kilat</span></div>
+        <p class="footer-tagline">Bersih Sekejap, Antar Cepat!</p>
         <p class="footer-desc">Layanan laundry profesional dengan pickup & delivery di Jakarta. Bersih, cepat, dan terpercaya sejak 2020.</p>
       </div>
       <div class="footer-links">
@@ -584,7 +533,7 @@
       </div>
     </div>
     <div class="footer-bottom">
-      <p>&copy; 2025 Laundry Kilat. Semua hak dilindungi undang-undang.</p>
+      <p>&copy; 2026 Laundry Kilat. Semua hak dilindungi undang-undang.</p>
       <p class="footer-made">Dibuat dengan ❤️ untuk pelanggan setia kami.</p>
     </div>
   </div>

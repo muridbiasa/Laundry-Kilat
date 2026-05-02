@@ -4,7 +4,6 @@
 // Payment Modal, Map (Leaflet), localStorage
 // ================================================
 
-// ===== KONSTANTA HARGA =====
 const HARGA_PAKET = {
   reguler: { nama: 'Reguler (2–3 Hari)', harga: 8000 },
   kilat:   { nama: 'Kilat 24 Jam',       harga: 12000 },
@@ -19,20 +18,16 @@ const STATUS_LABEL = {
   selesai:  'Selesai',
 };
 
-// ===== UTILITY: FORMAT RUPIAH =====
 function formatRupiah(angka) {
   return 'Rp ' + angka.toLocaleString('id-ID');
 }
 
-// ===== UTILITY: GENERATE ID PESANAN =====
-// Format: LK-{timestamp}-{random 4 digit}
 function generateOrderId() {
   const ts = Date.now();
   const rand = Math.floor(1000 + Math.random() * 9000);
   return `LK-${ts}-${rand}`;
 }
 
-// ===== UTILITY: FORMAT TANGGAL =====
 function formatTanggal(ts) {
   return new Date(ts).toLocaleDateString('id-ID', {
     day: '2-digit', month: 'long', year: 'numeric',
@@ -40,7 +35,6 @@ function formatTanggal(ts) {
   });
 }
 
-// ===== LOCALSTORAGE: SIMPAN & AMBIL PESANAN =====
 function simpanPesanan(pesanan) {
   const semua = ambilSemuaPesanan();
   semua.push(pesanan);
@@ -66,7 +60,6 @@ function updateStatusPesanan(id, statusBaru) {
   }
 }
 
-// ===== TOAST NOTIFIKASI =====
 let toastTimer;
 function tampilkanToast(pesan, durasi = 3000) {
   const el = document.getElementById('toast');
@@ -76,25 +69,22 @@ function tampilkanToast(pesan, durasi = 3000) {
   toastTimer = setTimeout(() => el.classList.remove('show'), durasi);
 }
 
-// ===== NAVBAR: SCROLL & HAMBURGER =====
+// Navbar Scroll & Hamburger
 (function initNavbar() {
   const navbar = document.getElementById('navbar');
   const hamburger = document.getElementById('hamburger');
   const navMenu = document.getElementById('nav-menu');
 
-  // Scroll efek navbar
   window.addEventListener('scroll', () => {
     navbar.classList.toggle('scrolled', window.scrollY > 20);
   });
 
-  // Toggle hamburger menu
   hamburger.addEventListener('click', () => {
     const isOpen = navMenu.classList.toggle('open');
     hamburger.classList.toggle('open', isOpen);
     hamburger.setAttribute('aria-expanded', isOpen);
   });
 
-  // Tutup menu saat klik nav link
   navMenu.querySelectorAll('.nav-link').forEach(link => {
     link.addEventListener('click', () => {
       navMenu.classList.remove('open');
@@ -103,7 +93,6 @@ function tampilkanToast(pesan, durasi = 3000) {
     });
   });
 
-  // Tutup menu saat klik di luar
   document.addEventListener('click', e => {
     if (!navbar.contains(e.target)) {
       navMenu.classList.remove('open');
@@ -113,7 +102,7 @@ function tampilkanToast(pesan, durasi = 3000) {
   });
 })();
 
-// ===== SCROLL REVEAL ANIMASI =====
+// Scroll Reveal
 (function initReveal() {
   const els = document.querySelectorAll(
     '.feature-card, .pricing-card, .contact-card, .calculator-card, .order-form, .order-info'
@@ -132,22 +121,19 @@ function tampilkanToast(pesan, durasi = 3000) {
   els.forEach(el => observer.observe(el));
 })();
 
-// ===== PRICING CARDS: Pilih Paket → Isi Form =====
+// Pricing Cards
 document.querySelectorAll('.pricing-choose').forEach(btn => {
   btn.addEventListener('click', () => {
     const paket = btn.dataset.paket;
-    // Isi select di form pemesanan
     const selectPaket = document.getElementById('paket');
     if (selectPaket) selectPaket.value = paket;
-    // Scroll ke form
     document.getElementById('pesan').scrollIntoView({ behavior: 'smooth' });
     tampilkanToast(`✅ Paket ${HARGA_PAKET[paket].nama} dipilih!`);
-    // Trigger preview harga
     hitungPreviewHarga();
   });
 });
 
-// ===== KALKULATOR HARGA =====
+// Kalkulator
 (function initKalkulator() {
   const btnHitung = document.getElementById('btn-hitung');
   const calcBerat = document.getElementById('calc-berat');
@@ -168,7 +154,6 @@ document.querySelectorAll('.pricing-choose').forEach(btn => {
     const subtotal = berat * paket.harga;
     const total = subtotal + BIAYA_ANTAR;
 
-    // Isi invoice preview
     document.getElementById('inv-date').textContent = new Date().toLocaleDateString('id-ID', { day:'2-digit', month:'short', year:'numeric' });
     document.getElementById('inv-paket').textContent = paket.nama;
     document.getElementById('inv-berat').textContent = berat + ' kg';
@@ -180,11 +165,8 @@ document.querySelectorAll('.pricing-choose').forEach(btn => {
   }
 
   btnHitung.addEventListener('click', hitungKalkulator);
-
-  // Trigger saat tekan Enter di input
   calcBerat.addEventListener('keydown', e => { if (e.key === 'Enter') hitungKalkulator(); });
 
-  // Tombol lanjut pesan dari kalkulator
   document.getElementById('btn-pesan-dari-kalkulator').addEventListener('click', () => {
     const berat = parseFloat(calcBerat.value);
     const paketKey = calcPaket.value;
@@ -197,7 +179,6 @@ document.querySelectorAll('.pricing-choose').forEach(btn => {
   });
 })();
 
-// ===== PREVIEW HARGA DI FORM PESAN =====
 function hitungPreviewHarga() {
   const berat = parseFloat(document.getElementById('berat').value);
   const paketKey = document.getElementById('paket').value;
@@ -214,14 +195,13 @@ function hitungPreviewHarga() {
 document.getElementById('berat').addEventListener('input', hitungPreviewHarga);
 document.getElementById('paket').addEventListener('change', hitungPreviewHarga);
 
-// ===== VALIDASI FORM PESANAN =====
+// Validasi Form
 function validasiForm(data) {
   const errors = {};
 
   if (!data.nama || data.nama.trim().length < 3)
     errors.nama = 'Nama minimal 3 karakter.';
 
-  // Validasi format WA: dimulai 08 atau +628, panjang 10-15 digit
   const waClean = data.wa.replace(/[\s\-]/g, '');
   if (!waClean || !/^(\+628|08)\d{8,13}$/.test(waClean))
     errors.wa = 'Format WA tidak valid. Contoh: 08123456789 atau +628123456789';
@@ -253,10 +233,9 @@ function bersihkanSemuaError() {
   ['nama', 'wa', 'alamat', 'berat', 'paket'].forEach(f => tampilkanError(f, ''));
 }
 
-// ===== STATE PESANAN AKTIF (untuk modal) =====
+// Form Pemesanan
 let pesananAktif = null;
 
-// ===== SUBMIT FORM PESANAN =====
 document.getElementById('order-form').addEventListener('submit', function(e) {
   e.preventDefault();
 
@@ -272,16 +251,13 @@ document.getElementById('order-form').addEventListener('submit', function(e) {
   bersihkanSemuaError();
   const errors = validasiForm(data);
 
-  // Tampilkan error jika ada
   if (Object.keys(errors).length > 0) {
     Object.entries(errors).forEach(([field, msg]) => tampilkanError(field, msg));
-    // Fokus ke error pertama
     const pertama = Object.keys(errors)[0];
     document.getElementById(pertama)?.focus();
     return;
   }
 
-  // Generate ID pesanan & buat objek pesanan
   const id = generateOrderId();
   const berat = parseFloat(data.berat);
   const paket = HARGA_PAKET[data.paket];
@@ -301,50 +277,95 @@ document.getElementById('order-form').addEventListener('submit', function(e) {
     total,
   };
 
-  // Simpan ke localStorage
   simpanPesanan(pesanan);
   pesananAktif = pesanan;
 
-  // Tampilkan modal pembayaran
   tampilkanModalPembayaran(pesanan, totalLaundry, total);
 });
 
-// ===== MODAL PEMBAYARAN =====
+// Modal Pembayaran & Integrasi Midtrans Serverless API
 function tampilkanModalPembayaran(pesanan, totalLaundry, total) {
-  // Isi data modal
   document.getElementById('modal-order-id').textContent = pesanan.id;
   document.getElementById('mi-nama').textContent = pesanan.nama;
   document.getElementById('mi-paket').textContent = HARGA_PAKET[pesanan.paket].nama;
   document.getElementById('mi-berat').textContent = pesanan.berat + ' kg';
   document.getElementById('mi-laundry').textContent = formatRupiah(totalLaundry);
   document.getElementById('mi-total').textContent = formatRupiah(total);
-  document.getElementById('qr-total').textContent = formatRupiah(total);
-  document.getElementById('transfer-total').textContent = formatRupiah(total);
 
-  // Generate QR placeholder
-  generasiQR();
-
-  // Link WA dengan pesan konfirmasi
-  const pesan = encodeURIComponent(
-    `Konfirmasi Pembayaran Laundry Kilat\n\nID Pesanan: ${pesanan.id}\nNama: ${pesanan.nama}\nPaket: ${HARGA_PAKET[pesanan.paket].nama}\nBerat: ${pesanan.berat} kg\nTotal: ${formatRupiah(total)}\n\nBukti transfer/QRIS terlampir.`
-  );
-  document.getElementById('btn-kirim-bukti').href = `https://wa.me/6281234567890?text=${pesan}`;
-
-  // Tampilkan modal
   const modal = document.getElementById('payment-modal');
   modal.hidden = false;
   document.body.style.overflow = 'hidden';
-
-  // Fokus ke modal untuk aksesibilitas
   document.getElementById('modal-close').focus();
 }
 
-// Tutup modal - EVENT LISTENER LANGSUNG
+document.getElementById('btn-bayar-midtrans').addEventListener('click', async function() {
+    if (!pesananAktif) return;
+    
+    const btn = this;
+    btn.innerHTML = '⏳ Memproses...';
+    btn.disabled = true;
+
+    try {
+        // Ini akan memanggil endpoint Vercel Serverless Function yang kamu buat
+        const response = await fetch('/api/token', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                order_id: pesananAktif.id,
+                gross_amount: pesananAktif.total,
+                name: pesananAktif.nama,
+                phone: pesananAktif.wa
+            })
+        });
+        
+        if (!response.ok) throw new Error('Gagal memanggil API Token');
+
+        const data = await response.json();
+        const snapToken = data.token; 
+
+        window.snap.pay(snapToken, {
+            onSuccess: function(result) {
+                tampilkanToast('✅ Pembayaran Berhasil! Mengalihkan ke WhatsApp...');
+                updateStatusPesanan(pesananAktif.id, 'diproses');
+                
+                const noWAAdmin = "6285869951609";
+                const rincian = HARGA_PAKET[pesananAktif.paket].nama;
+                const totalRp = formatRupiah(pesananAktif.total);
+                
+                const pesanWA = encodeURIComponent(`Halo Admin Laundry Kilat! Pembayaran berhasil via Midtrans.\n\nID Pesanan: ${pesananAktif.id}\nNama: ${pesananAktif.nama}\nPaket: ${rincian}\nTotal: ${totalRp}\n\nMohon pesanan segera diproses. Terima kasih!`);
+                
+                window.location.href = `https://api.whatsapp.com/send?phone=${noWAAdmin}&text=${pesanWA}`;
+            },
+            onPending: function(result) {
+                tampilkanToast('⚠️ Menunggu pembayaran diselesaikan.');
+                resetBtn();
+            },
+            onError: function(result) {
+                tampilkanToast('❌ Pembayaran gagal. Silakan coba lagi.');
+                resetBtn();
+            },
+            onClose: function() {
+                tampilkanToast('⚠️ Pop-up ditutup sebelum pembayaran selesai.');
+                resetBtn();
+            }
+        });
+    } catch (error) {
+        console.error("Error memuat Snap Token:", error);
+        alert('Terjadi kesalahan saat menghubungi server pembayaran. Pastikan kamu sudah setup Vercel Serverless Function di /api/token.js');
+        resetBtn();
+    }
+
+    function resetBtn() {
+        btn.innerHTML = '💳 Bayar Sekarang (Snap Midtrans)';
+        btn.disabled = false;
+    }
+});
+
+// Tutup modal
 document.addEventListener('click', function(e) {
   const modal = document.getElementById('payment-modal');
   const btnClose = document.getElementById('modal-close');
   
-  // Klik tombol X
   if (e.target === btnClose) {
     e.preventDefault();
     e.stopPropagation();
@@ -356,7 +377,6 @@ document.addEventListener('click', function(e) {
     return;
   }
   
-  // Klik area overlay (luar modal)
   if (modal && e.target === modal && !modal.hidden) {
     modal.hidden = true;
     document.body.style.overflow = '';
@@ -364,7 +384,6 @@ document.addEventListener('click', function(e) {
   }
 });
 
-// Tekan ESC untuk tutup
 document.addEventListener('keydown', function(e) {
   if (e.key === 'Escape') {
     const modal = document.getElementById('payment-modal');
@@ -390,12 +409,11 @@ function resetFormSetelahModal() {
   }
 }
 
-// ===== COPY BUTTON =====
+// Copy Button
 document.addEventListener('click', e => {
   const btn = e.target.closest('.copy-btn');
   if (!btn) return;
 
-  // Salin nomor rekening atau order ID
   const teks = btn.dataset.copy || document.getElementById('modal-order-id')?.textContent;
   if (!teks) return;
 
@@ -409,53 +427,7 @@ document.addEventListener('click', e => {
   });
 });
 
-// ===== PAYMENT TABS =====
-document.querySelectorAll('.payment-tab').forEach(tab => {
-  tab.addEventListener('click', () => {
-    // Update tab aktif
-    document.querySelectorAll('.payment-tab').forEach(t => {
-      t.classList.remove('active');
-      t.setAttribute('aria-selected', 'false');
-    });
-    tab.classList.add('active');
-    tab.setAttribute('aria-selected', 'true');
-
-    // Tampilkan panel yang sesuai
-    const target = tab.dataset.tab;
-    document.querySelectorAll('.payment-panel').forEach(panel => {
-      panel.hidden = panel.id !== `panel-${target}`;
-    });
-  });
-});
-
-// ===== GENERATE QR PLACEHOLDER (CSS Grid + Random Cells) =====
-function generasiQR() {
-  const grid = document.getElementById('qr-grid');
-  if (!grid) return;
-  grid.innerHTML = '';
-
-  const SIZE = 10; // 10x10 grid
-  // Seed warna untuk pola QR dummy yang konsisten
-  for (let i = 0; i < SIZE * SIZE; i++) {
-    const cell = document.createElement('div');
-    cell.className = 'qr-cell';
-    // Pojok QR (3 kotak penjaga)
-    const row = Math.floor(i / SIZE);
-    const col = i % SIZE;
-    const isGuard = (
-      (row < 3 && col < 3) ||
-      (row < 3 && col >= SIZE - 3) ||
-      (row >= SIZE - 3 && col < 3) ||
-      (row === 0 || row === 2 || row === SIZE - 1 || row === SIZE - 3) ||
-      (col === 0 || col === 2 || col === SIZE - 1 || col === SIZE - 3)
-    );
-    const isDark = isGuard || Math.random() > 0.45;
-    cell.style.background = isDark ? '#0F172A' : 'white';
-    grid.appendChild(cell);
-  }
-}
-
-// ===== TRACKER PESANAN =====
+// Tracker Pesanan
 (function initTracker() {
   const btnLacak = document.getElementById('btn-lacak');
   const trackerInput = document.getElementById('tracker-input');
@@ -471,21 +443,18 @@ function generasiQR() {
   function updateProgressUI(status) {
     const idx = getStepIndex(status);
 
-    // Update setiap step
     for (let i = 1; i <= 4; i++) {
       const stepEl = document.getElementById(`step-${i}`);
-      const connEl = stepEl?.nextElementSibling; // .progress-connector
+      const connEl = stepEl?.nextElementSibling; 
       if (stepEl) stepEl.classList.toggle('active', i - 1 <= idx);
       if (connEl && connEl.classList.contains('progress-connector')) {
         connEl.classList.toggle('active', i - 1 < idx);
       }
     }
 
-    // Update status badge
     const badge = document.getElementById('tr-status');
     if (badge) {
       badge.textContent = STATUS_LABEL[status] || status;
-      // Warna badge berdasarkan status
       badge.style.background = idx === 3 ? 'var(--success)' : 'var(--primary-white)';
       badge.style.color = idx === 3 ? 'white' : 'var(--success)';
     }
@@ -513,14 +482,12 @@ function generasiQR() {
 
     pesananDilacak = pesanan;
 
-    // Isi data tracker
     document.getElementById('tr-id').textContent = pesanan.id;
     document.getElementById('tr-nama').textContent = pesanan.nama;
     document.getElementById('tr-paket').textContent = HARGA_PAKET[pesanan.paket]?.nama || pesanan.paket;
 
     updateProgressUI(pesanan.status);
 
-    // Tampilkan result, sembunyikan empty
     trackerResult.hidden = false;
     trackerEmpty.hidden = true;
     trackerEmpty.setAttribute('aria-hidden', 'true');
@@ -530,7 +497,6 @@ function generasiQR() {
   btnLacak.addEventListener('click', lacakPesanan);
   trackerInput.addEventListener('keydown', e => { if (e.key === 'Enter') lacakPesanan(); });
 
-  // ===== SIMULASI PERUBAHAN STATUS =====
   document.getElementById('btn-simulasi').addEventListener('click', () => {
     if (!pesananDilacak) return;
 
@@ -544,15 +510,11 @@ function generasiQR() {
     btnSimulasi.disabled = true;
     btnSimulasi.textContent = '⏳ Memperbarui status...';
 
-    // Simulasi delay jaringan
     setTimeout(() => {
       const statusBaru = STATUS_LIST[currentIdx + 1];
       pesananDilacak.status = statusBaru;
 
-      // Update localStorage
       updateStatusPesanan(pesananDilacak.id, statusBaru);
-
-      // Update UI
       updateProgressUI(statusBaru);
 
       btnSimulasi.disabled = false;
@@ -560,7 +522,6 @@ function generasiQR() {
 
       tampilkanToast(`🔄 Status diperbarui: ${STATUS_LABEL[statusBaru]}`);
 
-      // Jika sudah selesai, perbarui posisi kurir di peta
       if (statusBaru === 'selesai' && typeof updateKurirPeta === 'function') {
         updateKurirPeta('selesai');
       }
@@ -568,13 +529,12 @@ function generasiQR() {
   });
 })();
 
-// ===== PETA LEAFLET =====
+// Peta Leaflet
 let mapInstance = null;
 let kurirMarker = null;
 
-// Koordinat dummy: Jakarta Pusat
-const KOORDINAT_RUMAH  = [-6.2088, 106.8456]; // Rumah pelanggan (Monas area)
-const KOORDINAT_LAUNDRY = [-6.1944, 106.8229]; // Lokasi laundry (Grogol area)
+const KOORDINAT_RUMAH  = [-6.2088, 106.8456]; 
+const KOORDINAT_LAUNDRY = [-6.1944, 106.8229]; 
 const ROUTE_KURIR = [
   [-6.1944, 106.8229],
   [-6.1980, 106.8300],
@@ -582,7 +542,6 @@ const ROUTE_KURIR = [
   [-6.2088, 106.8456],
 ];
 
-// Ikon custom marker (emoji via divIcon)
 function buatIcon(emoji, ukuran = 32) {
   return L.divIcon({
     html: `<div style="font-size:${ukuran}px;line-height:1;filter:drop-shadow(0 2px 4px rgba(0,0,0,0.3));">${emoji}</div>`,
@@ -593,36 +552,31 @@ function buatIcon(emoji, ukuran = 32) {
 }
 
 function initPeta() {
-  if (mapInstance) return; // Jangan init ulang
+  if (mapInstance) return; 
 
   mapInstance = L.map('map', {
     center: [-6.2010, 106.8340],
     zoom: 14,
-    scrollWheelZoom: false, // Non-aktifkan scroll zoom untuk UX yang lebih baik
+    scrollWheelZoom: false, 
   });
 
-  // Tile layer OpenStreetMap
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '© <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors',
     maxZoom: 19,
   }).addTo(mapInstance);
 
-  // Marker rumah pelanggan
   L.marker(KOORDINAT_RUMAH, { icon: buatIcon('🏠') })
     .addTo(mapInstance)
     .bindPopup('<strong>📍 Lokasi Pickup Kamu</strong><br>Jl. Contoh No. 1, Jakarta Pusat');
 
-  // Marker lokasi laundry
   L.marker(KOORDINAT_LAUNDRY, { icon: buatIcon('🫧') })
     .addTo(mapInstance)
     .bindPopup('<strong>🫧 Laundry Kilat</strong><br>Jl. Sudirman No. 45, Jakarta');
 
-  // Marker kurir (posisi awal = laundry)
   kurirMarker = L.marker(ROUTE_KURIR[0], { icon: buatIcon('🛵') })
     .addTo(mapInstance)
     .bindPopup('<strong>🛵 Posisi Kurir</strong><br>Dalam perjalanan ke lokasi kamu...');
 
-  // Garis rute (polyline)
   L.polyline(ROUTE_KURIR, {
     color: '#A8FBD3',
     weight: 4,
@@ -630,7 +584,6 @@ function initPeta() {
     dashArray: '8, 6',
   }).addTo(mapInstance);
 
-  // Simulasi pergerakan kurir setiap 30 detik
   let routeIdx = 0;
   setInterval(() => {
     routeIdx = (routeIdx + 1) % ROUTE_KURIR.length;
@@ -640,7 +593,6 @@ function initPeta() {
   }, 30000);
 }
 
-// Update posisi kurir saat status berubah
 window.updateKurirPeta = function(status) {
   if (!kurirMarker) return;
   if (status === 'jemput') {
@@ -655,7 +607,6 @@ window.updateKurirPeta = function(status) {
   }
 };
 
-// Inisialisasi peta saat section tracker masuk viewport
 const mapObserver = new IntersectionObserver(entries => {
   entries.forEach(e => {
     if (e.isIntersecting) {
@@ -668,7 +619,7 @@ const mapObserver = new IntersectionObserver(entries => {
 const mapEl = document.getElementById('map');
 if (mapEl) mapObserver.observe(mapEl);
 
-// ===== ACTIVE NAV LINK sesuai scroll =====
+// Active Nav Link
 (function initActiveNav() {
   const sections = document.querySelectorAll('section[id]');
   const navLinks = document.querySelectorAll('.nav-link');
@@ -691,27 +642,21 @@ if (mapEl) mapObserver.observe(mapEl);
   }, { passive: true });
 })();
 
-// ===== SMOOTH ANCHOR SCROLL dengan offset navbar =====
+// Smooth Anchor
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   anchor.addEventListener('click', function(e) {
     const href = this.getAttribute('href');
-    // Jangan proses jika href kosong atau hanya "#"
     if (!href || href === '#') return;
     
     const target = document.querySelector(href);
     if (target) {
       e.preventDefault();
-      const offset = 76; // tinggi navbar
+      const offset = 76; 
       const top = target.getBoundingClientRect().top + window.scrollY - offset;
       window.scrollTo({ top, behavior: 'smooth' });
     }
   });
 });
 
-// ===== INISIALISASI: Hapus demo data =====
-// Cukup tampilkan empty state saja, user akan membuat pesanan sendiri
-
-// ===== LOG INFO =====
 console.info('%c🫧 Laundry Kilat', 'font-size:18px;font-weight:bold;color:#A8FBD3;background:#0F172A;padding:8px 16px;border-radius:8px;');
-console.info('✅ Semua pesanan tersimpan di localStorage: laundrykilat_orders');
-console.info('🎯 Mulai dengan membuat pesanan baru melalui form pemesanan.');
+console.info('✅ API Midtrans dengan Vercel Serverless Function aktif.');
